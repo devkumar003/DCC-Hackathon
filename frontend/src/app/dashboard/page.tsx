@@ -60,7 +60,7 @@ export default function Dashboard() {
       }
     });
 
-    recentItems.sort((a: any, b: any) => b.timestamp - a.timestamp);
+    recentItems.sort((a, b) => b.timestamp - a.timestamp);
 
     setStats({
       total: keys.length,

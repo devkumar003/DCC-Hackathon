@@ -94,12 +94,12 @@ export default function InterviewRoom({ params }: { params: Promise<{ id: string
       if (synthRef.current) synthRef.current.cancel();
       // Added isListening safely check inside
       if (recognitionRef.current) recognitionRef.current.stop();
-      if (videoRef.current && videoRef.current.srcObject) {
-        const stream = videoRef.current.srcObject as MediaStream;
+      const currentVideo = videoRef.current;
+      if (currentVideo && currentVideo.srcObject) {
+        const stream = currentVideo.srcObject as MediaStream;
         stream.getTracks().forEach(track => track.stop());
       }
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [interviewId]);
 
   useEffect(() => {

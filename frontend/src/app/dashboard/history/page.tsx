@@ -48,7 +48,7 @@ export default function HistoryPage() {
         console.error(err);
       }
     });
-    items.sort((a: any, b: any) => b.timestamp - a.timestamp);
+    items.sort((a, b) => b.timestamp - a.timestamp);
     setHistory(items);
   }, []);
 

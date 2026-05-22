@@ -4,8 +4,23 @@ import { BarChart3, TrendingUp, Award, Clock } from "lucide-react";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend } from 'recharts';
 import { useEffect, useState } from "react";
 
+interface ChartItem {
+  name: string;
+  score: number;
+  technical: number;
+  communication: number;
+}
+
+interface ParsedItem {
+  id: string;
+  score: number;
+  technical: number;
+  communication: number;
+  timestamp: number;
+}
+
 export default function AnalyticsPage() {
-  const [chartData, setChartData] = useState<any[]>([]);
+  const [chartData, setChartData] = useState<ChartItem[]>([]);
   const [stats, setStats] = useState({
     growth: 0,
     topSkill: "N/A",
@@ -16,7 +31,7 @@ export default function AnalyticsPage() {
     const keys = Object.keys(localStorage).filter(k => k.startsWith("scorecard_"));
     if (keys.length === 0) return;
 
-    const items: any[] = [];
+    const items: ParsedItem[] = [];
     const skillCounts: Record<string, number> = {};
 
     keys.forEach(key => {
