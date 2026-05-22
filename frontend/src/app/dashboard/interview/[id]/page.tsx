@@ -66,6 +66,9 @@ export default function InterviewRoom({ params }: { params: Promise<{ id: string
 
     const websocket = new WebSocket(wsUrl);
 
+    // Capture the ref early so it doesn't change before cleanup
+    const currentVideo = videoRef.current;
+
     websocket.onopen = () => {
       setIsConnected(true);
       console.log("Connected to Interview Engine");
@@ -94,7 +97,6 @@ export default function InterviewRoom({ params }: { params: Promise<{ id: string
       if (synthRef.current) synthRef.current.cancel();
       // Added isListening safely check inside
       if (recognitionRef.current) recognitionRef.current.stop();
-      const currentVideo = videoRef.current;
       if (currentVideo && currentVideo.srcObject) {
         const stream = currentVideo.srcObject as MediaStream;
         stream.getTracks().forEach(track => track.stop());

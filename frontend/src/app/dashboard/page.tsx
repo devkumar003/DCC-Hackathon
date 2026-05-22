@@ -9,6 +9,7 @@ interface RecentItem {
   score: number;
   role: string;
   date: string;
+  timestamp: number;
 }
 
 function formatDate(timestamp: number) {
